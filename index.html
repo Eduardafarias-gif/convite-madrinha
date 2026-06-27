@@ -4,123 +4,196 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Convite Especial</title>
-
 <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 body{
-    margin:0;
-    font-family: 'Georgia', serif;
-    background:#f8f1e7;
-    text-align:center;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:'Georgia', serif;
+overflow:hidden;
+background:linear-gradient(180deg,#091428,#1c2c4c,#2f4f6f);
+color:white;
+text-align:center;
 }
-
-#envelope{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+/* ESTRELAS */
+.star{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+animation:piscar 2s infinite;
 }
-
+@keyframes piscar{
+50%{opacity:0.2;}
+}
+/* ENVELOPE */
+#envelopeTela{
+position:absolute;
+}
 .envelope{
-    font-size:120px;
-    cursor:pointer;
-    transition:0.5s;
+font-size:130px;
+cursor:pointer;
+animation:flutuar 2s ease-in-out infinite;
 }
-
-.envelope:hover{
-    transform:scale(1.1);
+@keyframes flutuar{
+50%{transform:translateY(-15px);}
 }
-
+.clique{
+margin-top:10px;
+font-size:20px;
+}
+/* CONVITE */
 #convite{
-    display:none;
-    padding:20px;
-    min-height:100vh;
-    background-image:url('https://upload.wikimedia.org/wikipedia/commons/1/16/Saint_Francis_of_Assisi.jpg');
-    background-size:cover;
-    background-position:center;
+display:none;
+max-width:800px;
+padding:30px;
+margin:20px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(10px);
+border-radius:25px;
+box-shadow:0 0 30px rgba(255,255,255,0.3);
+animation:aparecer 2s;
 }
-
-.caixa{
-    background:rgba(255,255,255,0.9);
-    padding:25px;
-    border-radius:20px;
-    max-width:700px;
-    margin:40px auto;
+@keyframes aparecer{
+from{
+opacity:0;
+transform:scale(0.8);
 }
-
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+.saofrancisco{
+width:250px;
+border-radius:20px;
+box-shadow:0 0 20px gold;
+margin-bottom:20px;
+}
+h1{
+font-size:38px;
+color:#FFD700;
+margin-bottom:15px;
+}
+.texto{
+font-size:22px;
+line-height:1.8;
+margin-bottom:20px;
+}
 button{
-    padding:12px 25px;
-    margin:10px;
-    border:none;
-    border-radius:10px;
-    font-size:16px;
-    cursor:pointer;
+padding:15px 25px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
 }
-
-.aceito{
-    background:#4CAF50;
-    color:white;
+.sim{
+background:#FFD700;
 }
-
+.sim:hover{
+transform:scale(1.1);
+}
 .pensar{
-    background:#ccc;
+background:white;
+}
+.pensar:hover{
+transform:scale(1.1);
+}
+#mensagem{
+margin-top:25px;
+font-size:22px;
+font-weight:bold;
+color:#FFD700;
+}
+/* CORAÇÕES */
+.coracao{
+position:absolute;
+font-size:25px;
+animation:subir 4s linear forwards;
+}
+@keyframes subir{
+from{
+transform:translateY(0);
+opacity:1;
+}
+to{
+transform:translateY(-800px);
+opacity:0;
+}
 }
 </style>
 </head>
-
 <body>
-
-<div id="envelope">
-    <div class="envelope" onclick="abrirConvite()">✉️</div>
-    <h2>Clique para abrir uma mensagem especial</h2>
+<div id="envelopeTela">
+<div class="envelope" onclick="abrirConvite()">📩</div>
+<p class="clique">Clique para abrir sua mensagem especial</p>
 </div>
-
 <div id="convite">
-    <div class="caixa">
-        <h1>🌹 Convite Especial 🌹</h1>
-
-        <p>
-        Com muito carinho, fé e amor,
-        gostaria de fazer um convite muito especial.
-        </p>
-
-        <p>
-        Você aceita ser minha
-        <strong>Madrinha de Coroinha?</strong>
-        </p>
-
-        <p>
-        Que São Francisco interceda por nós e abençoe esta missão.
-        </p>
-
-        <button class="aceito" onclick="aceitou()">
-            💖 Aceito com alegria!
-        </button>
-
-        <button class="pensar" onclick="pensar()">
-            🤍 Preciso pensar
-        </button>
-
-        <h2 id="resposta"></h2>
-    </div>
+<img
+class="saofrancisco"
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Saint_Francis_of_Assisi.jpg/640px-Saint_Francis_of_Assisi.jpg">
+<h1>🕊️ Convite Especial 🕊️</h1>
+<p class="texto">
+Algumas pessoas são escolhidas por Deus para caminhar ao nosso lado
+em momentos muito especiais.
+</p>
+<p class="texto">
+Com muito carinho, fé e gratidão, gostaria de fazer um convite que vem
+diretamente do meu coração.
+</p>
+<p class="texto">
+✨ Você aceita ser minha Madrinha de Coroinha? ✨
+</p>
+<button class="sim" onclick="aceitar()">
+💖 Sim, aceito!
+</button>
+<button class="pensar" onclick="pensar()">
+🤍 Preciso rezar e pensar
+</button>
+<div id="mensagem"></div>
 </div>
-
 <script>
+/* ESTRELAS */
+for(let i=0;i<120;i++){
+let estrela=document.createElement('div');
+estrela.classList.add('star');
+estrela.style.left=Math.random()*100+'vw';
+estrela.style.top=Math.random()*100+'vh';
+estrela.style.animationDelay=Math.random()*3+'s';
+document.body.appendChild(estrela);
+}
 function abrirConvite(){
-    document.getElementById("envelope").style.display="none";
-    document.getElementById("convite").style.display="block";
+document.getElementById('envelopeTela').style.display='none';
+document.getElementById('convite').style.display='block';
 }
-
-function aceitou(){
-    document.getElementById("resposta").innerHTML =
-    "🎉 Obrigada! Estou muito feliz por ter você como madrinha! 💖";
+function aceitar(){
+document.getElementById('mensagem').innerHTML=
+'🎉 Obrigada por aceitar essa missão tão especial! Que São Francisco interceda sempre por nós. 🕊️';
+for(let i=0;i<50;i++){
+let coracao=document.createElement('div');
+coracao.classList.add('coracao');
+coracao.innerHTML='💖';
+coracao.style.left=Math.random()*100+'vw';
+coracao.style.bottom='0';
+document.body.appendChild(coracao);
+setTimeout(()=>{
+coracao.remove();
+},4000);
 }
-
+}
 function pensar(){
-    document.getElementById("resposta").innerHTML =
-    "🙏 Tudo bem! Reze com carinho e me dê sua resposta quando sentir no coração.";
+document.getElementById('mensagem').innerHTML=
+'🙏 Tudo bem! Reze com carinho e me responda quando sentir no coração.';
 }
 </script>
-
 </body>
 </html>
