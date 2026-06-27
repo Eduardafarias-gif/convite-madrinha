@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite Especial</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Georgia', serif;
+    background:#f8f1e7;
+    text-align:center;
+}
+
+#envelope{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.envelope{
+    font-size:120px;
+    cursor:pointer;
+    transition:0.5s;
+}
+
+.envelope:hover{
+    transform:scale(1.1);
+}
+
+#convite{
+    display:none;
+    padding:20px;
+    min-height:100vh;
+    background-image:url('https://upload.wikimedia.org/wikipedia/commons/1/16/Saint_Francis_of_Assisi.jpg');
+    background-size:cover;
+    background-position:center;
+}
+
+.caixa{
+    background:rgba(255,255,255,0.9);
+    padding:25px;
+    border-radius:20px;
+    max-width:700px;
+    margin:40px auto;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.aceito{
+    background:#4CAF50;
+    color:white;
+}
+
+.pensar{
+    background:#ccc;
+}
+</style>
+</head>
+
+<body>
+
+<div id="envelope">
+    <div class="envelope" onclick="abrirConvite()">✉️</div>
+    <h2>Clique para abrir uma mensagem especial</h2>
+</div>
+
+<div id="convite">
+    <div class="caixa">
+        <h1>🌹 Convite Especial 🌹</h1>
+
+        <p>
+        Com muito carinho, fé e amor,
+        gostaria de fazer um convite muito especial.
+        </p>
+
+        <p>
+        Você aceita ser minha
+        <strong>Madrinha de Coroinha?</strong>
+        </p>
+
+        <p>
+        Que São Francisco interceda por nós e abençoe esta missão.
+        </p>
+
+        <button class="aceito" onclick="aceitou()">
+            💖 Aceito com alegria!
+        </button>
+
+        <button class="pensar" onclick="pensar()">
+            🤍 Preciso pensar
+        </button>
+
+        <h2 id="resposta"></h2>
+    </div>
+</div>
+
+<script>
+function abrirConvite(){
+    document.getElementById("envelope").style.display="none";
+    document.getElementById("convite").style.display="block";
+}
+
+function aceitou(){
+    document.getElementById("resposta").innerHTML =
+    "🎉 Obrigada! Estou muito feliz por ter você como madrinha! 💖";
+}
+
+function pensar(){
+    document.getElementById("resposta").innerHTML =
+    "🙏 Tudo bem! Reze com carinho e me dê sua resposta quando sentir no coração.";
+}
+</script>
+
+</body>
+</html>
